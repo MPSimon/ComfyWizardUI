@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { MicrosoftClarity } from "@/components/shared/microsoft-clarity";
@@ -31,6 +32,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <MicrosoftClarity />
         {children}
+        <Analytics />
       </body>
     </html>
   );
