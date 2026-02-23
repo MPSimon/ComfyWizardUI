@@ -9,7 +9,11 @@ function sortDependencies(dependencies: DependencyItem[]) {
   });
 }
 
-export function DependencyCompactTable({ dependencies }: { dependencies: DependencyItem[] }) {
+export function DependencyCompactTable({
+  dependencies,
+}: {
+  dependencies: DependencyItem[];
+}) {
   const ordered = sortDependencies(dependencies);
 
   return (

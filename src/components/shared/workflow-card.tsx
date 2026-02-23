@@ -19,6 +19,7 @@ export function WorkflowCard({ workflow, hrefBase, emphasizeImage = false }: Wor
     <Link
       href={href}
       aria-label={`Open workflow ${workflow.title}`}
+      data-tour={workflow.slug === "sample" ? "hub-sample-card" : undefined}
       className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
       <Card className="overflow-hidden rounded-2xl border-border/60 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">

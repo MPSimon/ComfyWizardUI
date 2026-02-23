@@ -17,7 +17,7 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ComfyWizardUI",
+  title: "ComfyWizard",
   description: "Browse-first UI MVP for Comfy workflows and dependencies.",
 };
 

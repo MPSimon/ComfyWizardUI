@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { DependencyCompactTable } from "@/components/shared/dependency-display-options";
+import { SampleWorkflowOnboarding } from "@/components/shared/onboarding/sample-workflow-onboarding";
 import { DependencyTable } from "@/components/shared/dependency-table";
 import { QuickstartPanel } from "@/components/shared/quickstart-panel";
 import { SiteHeader } from "@/components/shared/site-header";
@@ -35,12 +36,11 @@ export default async function DetailPage({ params }: DetailPageProps) {
     return a.filename.localeCompare(b.filename);
   });
 
-  return (
-    <VariantAShell>
-      <SiteHeader basePath="/workflows" variantLabel="Core Experience" />
-      <main className="mx-auto w-full max-w-6xl space-y-6 px-4 py-8 md:px-6">
-        <div className="grid gap-6 md:grid-cols-[1fr_320px]">
-          <section className="space-y-6">
+  const content = (
+    <main className="mx-auto w-full max-w-6xl space-y-6 px-4 py-8 md:px-6">
+      <div className="grid gap-6 md:grid-cols-[1fr_320px]">
+        <section className="space-y-6">
+          <div className="space-y-6" data-tour={isSample ? "sample-overview" : undefined}>
             <div>
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant="outline" className="uppercase tracking-wide">
@@ -48,7 +48,9 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 </Badge>
                 {workflow.workflow.isVerified ? <Badge>Verified</Badge> : null}
               </div>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight">{workflow.workflow.title}</h1>
+              <h1 className="mt-3 text-3xl font-semibold tracking-tight">
+                {workflow.workflow.title}
+              </h1>
               <p className="mt-2 text-muted-foreground">{workflow.workflow.description}</p>
               {workflow.workflow.tags.length > 0 ? (
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -78,27 +80,28 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 </div>
               </CardContent>
             </Card>
+          </div>
 
-            {isSample ? (
-              <Card className="rounded-2xl gap-3 py-4">
-                <CardHeader className="flex flex-row items-center gap-2 px-4 pb-0">
-                  <CardTitle className="text-base">Dependencies</CardTitle>
-                  <span className="text-sm text-muted-foreground">{sortedRequirements.length} total dependencies</span>
-                </CardHeader>
-                <CardContent className="px-4">
-                  <DependencyCompactTable dependencies={sortedRequirements} />
-                </CardContent>
-              </Card>
-            ) : (
-              <DependencyTable title="Dependencies" dependencies={requirements} />
-            )}
-          </section>
+          {isSample ? (
+            <Card className="rounded-2xl gap-3 py-4" data-tour="dependencies">
+              <CardHeader className="flex flex-row items-center gap-2 px-4 pb-0">
+                <CardTitle className="text-base">Dependencies</CardTitle>
+                <span className="text-sm text-muted-foreground">{sortedRequirements.length} total dependencies</span>
+              </CardHeader>
+              <CardContent className="px-4">
+                <DependencyCompactTable dependencies={sortedRequirements} />
+              </CardContent>
+            </Card>
+          ) : (
+            <DependencyTable title="Dependencies" dependencies={requirements} />
+          )}
+        </section>
 
-          <aside>
+        <aside>
+          <div data-tour={isSample ? "install-actions" : undefined}>
             <QuickstartPanel
               runpodTemplateUrl={workflow.quickstart.runpodTemplateUrl}
               installCommandPreview={workflow.quickstart.installCommandPreview}
-              versions={workflow.versions}
             />
             <Card className="mt-4 rounded-2xl gap-3 py-4">
               <CardHeader className="px-4 pb-0">
@@ -111,29 +114,50 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 <p>4. Open ComfyUI and generate.</p>
               </CardContent>
             </Card>
+          </div>
+          <Card className="mt-4 rounded-2xl gap-3 py-4">
+            <CardHeader className="px-4 pb-0">
+              <CardTitle className="text-base">Workflow Metadata</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-2 px-4 text-sm">
+              <div className="rounded-lg border p-3">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Latest Version</p>
+                <p className="font-medium">v{workflow.workflow.latestVersion}</p>
+              </div>
+              <div className="rounded-lg border p-3">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Updated</p>
+                <p className="font-medium">{new Date(workflow.workflow.updatedAt).toLocaleDateString()}</p>
+              </div>
+              <div className="rounded-lg border p-3">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Total Requirements</p>
+                <p className="font-medium">{requirements.length}</p>
+              </div>
+            </CardContent>
+          </Card>
+          {workflow.versions.length > 0 ? (
             <Card className="mt-4 rounded-2xl gap-3 py-4">
               <CardHeader className="px-4 pb-0">
-                <CardTitle className="text-base">Workflow Metadata</CardTitle>
+                <CardTitle className="text-base">Versions</CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-2 px-4 text-sm">
-                <div className="rounded-lg border p-3">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Latest Version</p>
-                  <p className="font-medium">v{workflow.workflow.latestVersion}</p>
-                </div>
-                <div className="rounded-lg border p-3">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Updated</p>
-                  <p className="font-medium">{new Date(workflow.workflow.updatedAt).toLocaleDateString()}</p>
-                </div>
-                <div className="rounded-lg border p-3">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Total Requirements</p>
-                  <p className="font-medium">{requirements.length}</p>
-                </div>
+              <CardContent className="space-y-2 px-4">
+                {workflow.versions.map((version) => (
+                  <div key={version.id} className="rounded-lg border p-3 text-sm">
+                    <p className="font-medium">v{version.version}</p>
+                    <p className="mt-1 text-muted-foreground">{version.notes}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
-          </aside>
-        </div>
+          ) : null}
+        </aside>
+      </div>
+    </main>
+  );
 
-      </main>
+  return (
+    <VariantAShell>
+      <SiteHeader basePath="/workflows" variantLabel="Core Experience" />
+      {isSample ? <SampleWorkflowOnboarding>{content}</SampleWorkflowOnboarding> : content}
     </VariantAShell>
   );
 }
