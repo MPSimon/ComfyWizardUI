@@ -38,7 +38,11 @@ export function OnboardingMobileSheet({
         <p className="mt-2 text-sm text-zinc-300">{step.body}</p>
 
         <div className="mt-4 grid grid-cols-2 gap-2">
-          <Button variant="outline" onClick={onSkip}>
+          <Button
+            variant="outline"
+            className="border-zinc-700 bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100"
+            onClick={onSkip}
+          >
             Skip
           </Button>
           {isLast ? (

@@ -5,12 +5,6 @@ import type { OnboardingStep } from "@/components/shared/onboarding/onboarding-t
 
 const SAMPLE_TOUR_STEPS: OnboardingStep[] = [
   {
-    id: "sample-title",
-    title: "This is the sample workflow",
-    body: "Start here to understand the full install-ready flow before trying other listings.",
-    target: '[data-tour="sample-title"]',
-  },
-  {
     id: "dependencies",
     title: "Check dependencies first",
     body: "These are the exact files you need in ComfyUI before the workflow can run correctly.",
@@ -36,7 +30,12 @@ type SampleWorkflowOnboardingProps = {
 
 export function SampleWorkflowOnboarding({ children }: SampleWorkflowOnboardingProps) {
   return (
-    <OnboardingProvider tourId="sample-workflow" steps={SAMPLE_TOUR_STEPS} funnelId="hub">
+    <OnboardingProvider
+      tourId="sample-workflow"
+      steps={SAMPLE_TOUR_STEPS}
+      funnelId="hub"
+      autoStartOnFirstVisit={false}
+    >
       {children}
     </OnboardingProvider>
   );

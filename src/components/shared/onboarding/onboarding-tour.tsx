@@ -120,7 +120,12 @@ export function OnboardingTour({
         <p className="mt-2 text-sm text-zinc-300">{step.body}</p>
 
         <div className="mt-4 flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={onSkip}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-zinc-700 bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100"
+            onClick={onSkip}
+          >
             Skip
           </Button>
           <Button variant="ghost" size="sm" onClick={onPrev} disabled={stepIndex === 0}>

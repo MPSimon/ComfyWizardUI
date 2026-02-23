@@ -14,6 +14,7 @@ type OnboardingProviderProps = {
   tourId: OnboardingTourId;
   steps: OnboardingStep[];
   funnelId?: WaitlistFunnelId;
+  autoStartOnFirstVisit?: boolean;
   children: React.ReactNode;
 };
 
@@ -38,6 +39,7 @@ export function OnboardingProvider({
   steps,
   children,
   funnelId = "hub",
+  autoStartOnFirstVisit = true,
 }: OnboardingProviderProps) {
   const [open, setOpen] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
@@ -81,11 +83,11 @@ export function OnboardingProvider({
       openTour(true);
       return;
     }
-    if (!state.seen) {
+    if (autoStartOnFirstVisit && !state.seen) {
       openTour(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [autoStartOnFirstVisit, searchParams]);
 
   useEffect(() => {
     const handler = (event: Event) => {

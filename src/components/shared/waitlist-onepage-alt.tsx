@@ -145,7 +145,7 @@ export function WaitlistOnepageAlt({ totalSignups, funnelId }: WaitlistOnepageAl
                 variant="outline"
                 className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800"
               >
-                <Link href="/workflow/sample?tour=1" className="inline-flex items-center gap-2">
+                <Link href="/workflows?tour=1" className="inline-flex items-center gap-2">
                   See sample install flow <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

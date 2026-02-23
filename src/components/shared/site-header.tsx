@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 
 type SiteHeaderProps = {
@@ -10,15 +10,10 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ basePath, variantLabel }: SiteHeaderProps) {
-  const pathname = usePathname();
   const router = useRouter();
 
   function openHelpTour() {
-    if (pathname === "/workflow/sample") {
-      window.dispatchEvent(new CustomEvent("cw:open-tour", { detail: { tourId: "sample-workflow" } }));
-      return;
-    }
-    router.push("/workflow/sample?tour=1");
+    router.push("/workflows?tour=1");
   }
 
   return (
