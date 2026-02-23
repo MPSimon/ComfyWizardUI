@@ -49,6 +49,21 @@ export function QuickstartPanel({ runpodTemplateUrl, installCommandPreview }: Qu
           <code className="block whitespace-pre-wrap break-all text-xs">{installCommandPreview}</code>
         </div>
 
+        <div className="rounded-xl border p-3 text-xs text-muted-foreground">
+          <p className="font-medium text-foreground">RunPod secrets (optional for gated assets)</p>
+          <p className="mt-1">
+            Set <code>HF_TOKEN</code> and <code>CIVITAI_TOKEN</code> in RunPod Secrets.
+          </p>
+          <a
+            href="https://console.runpod.io/user/secrets"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1 inline-flex items-center gap-1 text-primary hover:underline"
+          >
+            Open RunPod Secrets <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </div>
+
         <Button
           variant="outline"
           className="w-full justify-between overflow-hidden transition-colors hover:bg-muted/60"

@@ -7,6 +7,8 @@
 - [ ] Waitlist data persistence enabled (`/.data/waitlist-store.json` writable on host)
 - [ ] UTM links prepared for each channel/post
 - [ ] Quickstart copy is non-placeholder
+- [ ] RunPod token naming is consistent everywhere (`HF_TOKEN`, `CIVITAI_TOKEN`)
+- [ ] Workflow page includes RunPod Secrets link (`https://console.runpod.io/user/secrets`)
 - [ ] Lint/test/build pass in CI
 
 ## Suggested launch metrics
