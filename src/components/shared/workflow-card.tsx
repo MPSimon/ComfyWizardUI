@@ -46,8 +46,7 @@ export function WorkflowCard({ workflow, hrefBase, emphasizeImage = false }: Wor
         </CardHeader>
         <CardContent className="pb-3 text-sm text-muted-foreground">
           <div className="flex items-center justify-between">
-            <span>Required: {workflow.dependencyCounts.required}</span>
-            <span>Optional: {workflow.dependencyCounts.optional}</span>
+            <span>Required dependencies: {workflow.dependencyCounts.required}</span>
           </div>
           <div className="mt-1">Updated: {new Date(workflow.updatedAt).toLocaleDateString()}</div>
         </CardContent>

@@ -25,7 +25,7 @@ describe("WorkflowCard", () => {
 
     expect(screen.getByText("WAN Portrait")).toBeInTheDocument();
     expect(screen.getByText("A portrait workflow")).toBeInTheDocument();
-    expect(screen.getByText("Required: 2")).toBeInTheDocument();
+    expect(screen.getByText("Required dependencies: 2")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /open workflow wan portrait/i })).toHaveAttribute(
       "href",
       "/workflow/wan-portrait",
