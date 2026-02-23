@@ -4,7 +4,7 @@
     "slug": "sample",
     "version": "1.0.0",
     "stack": "wan",
-    "workflowFileUrl": "https://comfy.bitreq.nl/stacks/wan/workflows/PhotoFlow_Wan_T2I_v1.0.json",
+    "workflowFileUrl": "https://assets.comfywizard.tech/PhotoFlow_Wan_T2I_v1.0.json",
     "workflowFileName": "PhotoFlow_Wan_T2I_v1.0.json"
   },
   "dependencies": [
