@@ -46,9 +46,13 @@ export function OnboardingMobileSheet({
             Skip
           </Button>
           {isLast ? (
-            <Button onClick={onDone}>Finish</Button>
+            <Button className="bg-amber-400 text-black hover:bg-amber-300" onClick={onDone}>
+              Finish
+            </Button>
           ) : (
-            <Button onClick={onNext}>Next</Button>
+            <Button className="bg-amber-400 text-black hover:bg-amber-300" onClick={onNext}>
+              Next
+            </Button>
           )}
         </div>
 

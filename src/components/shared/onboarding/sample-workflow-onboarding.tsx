@@ -5,16 +5,10 @@ import type { OnboardingStep } from "@/components/shared/onboarding/onboarding-t
 
 const SAMPLE_TOUR_STEPS: OnboardingStep[] = [
   {
-    id: "sample-title",
+    id: "sample-overview",
     title: "Start with the workflow overview",
-    body: "This title and description tell you what this sample does and what outcome to expect.",
-    target: '[data-tour="sample-title"]',
-  },
-  {
-    id: "workflow-preview",
-    title: "Review the workflow preview",
-    body: "Use this preview to verify this is the style/workflow you want before installing dependencies.",
-    target: '[data-tour="workflow-preview"]',
+    body: "Read the title and description, then quickly verify the preview so you know this is the right workflow before installing.",
+    target: '[data-tour="sample-overview"]',
   },
   {
     id: "dependencies",

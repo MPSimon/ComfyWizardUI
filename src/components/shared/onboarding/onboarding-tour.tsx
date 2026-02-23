@@ -45,13 +45,6 @@ export function OnboardingTour({
 
   useEffect(() => {
     if (!open) return;
-    const el = document.querySelector(step.target);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-  }, [open, step.target, stepIndex]);
-
-  useEffect(() => {
-    if (!open) return;
 
     const focusSelector = 'button:not([disabled]),[href],[tabindex]:not([tabindex="-1"])';
     const onKeyDown = (event: KeyboardEvent) => {
@@ -139,11 +132,19 @@ export function OnboardingTour({
             Previous
           </Button>
           {isLast ? (
-            <Button size="sm" className="ml-auto" onClick={onDone}>
+            <Button
+              size="sm"
+              className="ml-auto bg-amber-400 text-black hover:bg-amber-300"
+              onClick={onDone}
+            >
               Finish
             </Button>
           ) : (
-            <Button size="sm" className="ml-auto" onClick={onNext}>
+            <Button
+              size="sm"
+              className="ml-auto bg-amber-400 text-black hover:bg-amber-300"
+              onClick={onNext}
+            >
               Next
             </Button>
           )}

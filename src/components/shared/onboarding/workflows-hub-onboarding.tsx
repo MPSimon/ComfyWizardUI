@@ -88,13 +88,13 @@ export function WorkflowsHubOnboarding() {
           </Button>
           <Button
             size="sm"
-            className="ml-auto"
+            className="ml-auto bg-amber-400 text-black hover:bg-amber-300"
             onClick={() => {
               setDismissed(true);
               router.push("/workflow/sample?tour=1");
             }}
           >
-            Open sample
+            Open workflow
           </Button>
         </div>
       </div>
