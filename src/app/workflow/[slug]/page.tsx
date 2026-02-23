@@ -83,13 +83,13 @@ export default async function DetailPage({ params }: DetailPageProps) {
           </div>
 
           {isSample ? (
-            <Card className="rounded-2xl gap-3 py-4">
+            <Card className="rounded-2xl gap-3 py-4" data-tour="dependencies">
               <CardHeader className="flex flex-row items-center gap-2 px-4 pb-0">
                 <CardTitle className="text-base">Dependencies</CardTitle>
                 <span className="text-sm text-muted-foreground">{sortedRequirements.length} total dependencies</span>
               </CardHeader>
               <CardContent className="px-4">
-                <DependencyCompactTable dependencies={sortedRequirements} tourEnabled />
+                <DependencyCompactTable dependencies={sortedRequirements} />
               </CardContent>
             </Card>
           ) : (
@@ -98,23 +98,24 @@ export default async function DetailPage({ params }: DetailPageProps) {
         </section>
 
         <aside>
-          <QuickstartPanel
-            runpodTemplateUrl={workflow.quickstart.runpodTemplateUrl}
-            installCommandPreview={workflow.quickstart.installCommandPreview}
-            versions={workflow.versions}
-            tourEnabled={isSample}
-          />
-          <Card className="mt-4 rounded-2xl gap-3 py-4">
-            <CardHeader className="px-4 pb-0">
-              <CardTitle className="text-base">Install Flow</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-1.5 px-4 text-sm text-muted-foreground">
-              <p>1. Choose this workflow listing.</p>
-              <p>2. Copy install command to your RunPod terminal.</p>
-              <p>3. Run sync to fetch dependencies.</p>
-              <p>4. Open ComfyUI and generate.</p>
-            </CardContent>
-          </Card>
+          <div data-tour={isSample ? "install-actions" : undefined}>
+            <QuickstartPanel
+              runpodTemplateUrl={workflow.quickstart.runpodTemplateUrl}
+              installCommandPreview={workflow.quickstart.installCommandPreview}
+              versions={workflow.versions}
+            />
+            <Card className="mt-4 rounded-2xl gap-3 py-4">
+              <CardHeader className="px-4 pb-0">
+                <CardTitle className="text-base">Install Flow</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-1.5 px-4 text-sm text-muted-foreground">
+                <p>1. Choose this workflow listing.</p>
+                <p>2. Copy install command to your RunPod terminal.</p>
+                <p>3. Run sync to fetch dependencies.</p>
+                <p>4. Open ComfyUI and generate.</p>
+              </CardContent>
+            </Card>
+          </div>
           <Card className="mt-4 rounded-2xl gap-3 py-4">
             <CardHeader className="px-4 pb-0">
               <CardTitle className="text-base">Workflow Metadata</CardTitle>

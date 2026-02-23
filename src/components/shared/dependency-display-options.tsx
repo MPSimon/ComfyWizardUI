@@ -11,15 +11,13 @@ function sortDependencies(dependencies: DependencyItem[]) {
 
 export function DependencyCompactTable({
   dependencies,
-  tourEnabled = false,
 }: {
   dependencies: DependencyItem[];
-  tourEnabled?: boolean;
 }) {
   const ordered = sortDependencies(dependencies);
 
   return (
-    <div className="overflow-x-auto rounded-xl border" data-tour={tourEnabled ? "dependencies" : undefined}>
+    <div className="overflow-x-auto rounded-xl border">
       <table className="w-full text-sm">
         <thead className="bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
           <tr>

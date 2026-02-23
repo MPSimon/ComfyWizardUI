@@ -9,31 +9,29 @@ type QuickstartPanelProps = {
   runpodTemplateUrl: string;
   installCommandPreview: string;
   versions?: WorkflowVersion[];
-  tourEnabled?: boolean;
 };
 
 export function QuickstartPanel({
   runpodTemplateUrl,
   installCommandPreview,
   versions = [],
-  tourEnabled = false,
 }: QuickstartPanelProps) {
   return (
-    <Card className="rounded-2xl gap-3 py-4" data-tour={tourEnabled ? "install-actions" : undefined}>
+    <Card className="rounded-2xl gap-3 py-4">
       <CardHeader className="space-y-1 px-4 pb-0">
-        <CardTitle className="text-base">Quickstart Install (Preview)</CardTitle>
+        <CardTitle className="text-base">Quickstart Install</CardTitle>
         <Badge variant="secondary" className="w-fit">
           One-command install
         </Badge>
       </CardHeader>
       <CardContent className="space-y-2 px-4">
-        <Button asChild className="w-full justify-between" data-tour={tourEnabled ? "runpod-template" : undefined}>
+        <Button asChild className="w-full justify-between">
           <a href={runpodTemplateUrl} target="_blank" rel="noreferrer">
             Open RunPod template <ExternalLink className="h-4 w-4" />
           </a>
         </Button>
 
-        <div className="rounded-xl border bg-muted/40 p-3" data-tour={tourEnabled ? "quickstart-command" : undefined}>
+        <div className="rounded-xl border bg-muted/40 p-3">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Install command preview
           </p>

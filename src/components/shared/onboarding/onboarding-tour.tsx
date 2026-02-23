@@ -92,8 +92,13 @@ export function OnboardingTour({
 
   const isLast = stepIndex === totalSteps - 1;
   const tooltipWidth = 340;
-  const left = Math.max(16, Math.min(targetRect.left, window.innerWidth - tooltipWidth - 16));
-  const top = Math.min(targetRect.bottom + 12, window.innerHeight - 220);
+  const isDependenciesStep = step.id === "dependencies";
+  const left = isDependenciesStep
+    ? Math.max(16, targetRect.left - tooltipWidth - 20)
+    : Math.max(16, Math.min(targetRect.left, window.innerWidth - tooltipWidth - 16));
+  const top = isDependenciesStep
+    ? Math.max(16, Math.min(targetRect.top, window.innerHeight - 220))
+    : Math.min(targetRect.bottom + 12, window.innerHeight - 220);
 
   return (
     <div className="fixed inset-0 z-[90]">
