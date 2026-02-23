@@ -5,22 +5,28 @@ import type { OnboardingStep } from "@/components/shared/onboarding/onboarding-t
 
 const SAMPLE_TOUR_STEPS: OnboardingStep[] = [
   {
+    id: "sample-title",
+    title: "Start with the workflow overview",
+    body: "This title and description tell you what this sample does and what outcome to expect.",
+    target: '[data-tour="sample-title"]',
+  },
+  {
+    id: "workflow-preview",
+    title: "Review the workflow preview",
+    body: "Use this preview to verify this is the style/workflow you want before installing dependencies.",
+    target: '[data-tour="workflow-preview"]',
+  },
+  {
     id: "dependencies",
-    title: "Check dependencies first",
-    body: "These are the exact files you need in ComfyUI before the workflow can run correctly.",
+    title: "Check dependencies",
+    body: "These are the exact files required to run the workflow correctly in ComfyUI.",
     target: '[data-tour="dependencies"]',
   },
   {
-    id: "quickstart-command",
-    title: "Copy the install command",
-    body: "Run this command in your RunPod terminal. It fetches workflow assets and installs them to the right folders.",
-    target: '[data-tour="quickstart-command"]',
-  },
-  {
-    id: "runpod-template",
-    title: "Launch a RunPod template",
-    body: "Open this template, paste the command, then load the workflow in ComfyUI and generate.",
-    target: '[data-tour="runpod-template"]',
+    id: "install-actions",
+    title: "Install and run",
+    body: "Copy the command, run it in your pod terminal, then use the RunPod template link and generate in ComfyUI.",
+    target: '[data-tour="install-actions"]',
   },
 ];
 

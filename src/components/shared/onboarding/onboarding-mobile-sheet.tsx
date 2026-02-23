@@ -29,7 +29,7 @@ export function OnboardingMobileSheet({
   const isLast = stepIndex === totalSteps - 1;
 
   return (
-    <div className="fixed inset-0 z-[90] bg-black/60">
+    <div className="fixed inset-0 z-[90] bg-black/35">
       <div className="absolute inset-x-0 bottom-0 rounded-t-2xl border border-zinc-800 bg-zinc-950 p-5 text-zinc-100 shadow-2xl">
         <p className="text-xs uppercase tracking-wide text-zinc-400">
           Step {stepIndex + 1} of {totalSteps}

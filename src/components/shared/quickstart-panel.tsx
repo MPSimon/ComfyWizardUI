@@ -19,7 +19,7 @@ export function QuickstartPanel({
   tourEnabled = false,
 }: QuickstartPanelProps) {
   return (
-    <Card className="rounded-2xl gap-3 py-4">
+    <Card className="rounded-2xl gap-3 py-4" data-tour={tourEnabled ? "install-actions" : undefined}>
       <CardHeader className="space-y-1 px-4 pb-0">
         <CardTitle className="text-base">Quickstart Install (Preview)</CardTitle>
         <Badge variant="secondary" className="w-fit">

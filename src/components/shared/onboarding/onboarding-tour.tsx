@@ -45,6 +45,13 @@ export function OnboardingTour({
 
   useEffect(() => {
     if (!open) return;
+    const el = document.querySelector(step.target);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  }, [open, step.target, stepIndex]);
+
+  useEffect(() => {
+    if (!open) return;
 
     const focusSelector = 'button:not([disabled]),[href],[tabindex]:not([tabindex="-1"])';
     const onKeyDown = (event: KeyboardEvent) => {
@@ -97,9 +104,9 @@ export function OnboardingTour({
 
   return (
     <div className="fixed inset-0 z-[90]">
-      <div className="absolute inset-0 bg-black/65" />
+      <div className="absolute inset-0 bg-black/35" />
       <div
-        className="pointer-events-none absolute rounded-xl border-2 border-amber-300 shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]"
+        className="pointer-events-none absolute rounded-xl border-2 border-amber-300 shadow-[0_0_0_9999px_rgba(0,0,0,0.28)]"
         style={{
           left: targetRect.left - 6,
           top: targetRect.top - 6,
@@ -110,7 +117,7 @@ export function OnboardingTour({
 
       <div
         ref={panelRef}
-        className="absolute w-[340px] rounded-xl border border-zinc-700 bg-zinc-950 p-4 text-zinc-100 shadow-2xl"
+        className="absolute w-[340px] rounded-xl border border-zinc-700 bg-zinc-900/95 p-4 text-zinc-100 shadow-2xl"
         style={{ left, top }}
       >
         <p className="text-xs uppercase tracking-wide text-zinc-400">

@@ -40,14 +40,14 @@ export default async function DetailPage({ params }: DetailPageProps) {
     <main className="mx-auto w-full max-w-6xl space-y-6 px-4 py-8 md:px-6">
       <div className="grid gap-6 md:grid-cols-[1fr_320px]">
         <section className="space-y-6">
-          <div>
+          <div data-tour={isSample ? "sample-title" : undefined}>
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant="outline" className="uppercase tracking-wide">
                 {workflow.workflow.stack}
               </Badge>
               {workflow.workflow.isVerified ? <Badge>Verified</Badge> : null}
             </div>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight" data-tour={isSample ? "sample-title" : undefined}>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight">
               {workflow.workflow.title}
             </h1>
             <p className="mt-2 text-muted-foreground">{workflow.workflow.description}</p>
@@ -62,7 +62,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
             ) : null}
           </div>
 
-          <Card className="overflow-hidden rounded-2xl gap-3 py-4">
+          <Card className="overflow-hidden rounded-2xl gap-3 py-4" data-tour={isSample ? "workflow-preview" : undefined}>
             <CardHeader className="px-4 pb-0">
               <CardTitle className="text-base">Workflow Preview</CardTitle>
             </CardHeader>
