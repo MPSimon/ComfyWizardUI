@@ -20,7 +20,7 @@ Exit codes:
   0 = success (or optional failures only)
   2 = required dependency failures
   3 = manifest fetch/validation failure
-  4 = workflow activation failure
+  4 = workflow file download/install failure
 USAGE
 }
 
@@ -111,12 +111,11 @@ if [[ -z "$workflow_file_url" || -z "$workflow_file_name" ]]; then
   exit 3
 fi
 
-workflows_dir="${COMFY_ROOT}/user/default/workflows"
-active_dir="${workflows_dir}/Active"
+workflows_dir="${COMFY_ROOT}/user/default/workflows/ComfyWizard"
 models_dir="${COMFY_ROOT}/models"
 custom_nodes_dir="${COMFY_ROOT}/custom_nodes"
 
-mkdir -p "$workflows_dir" "$active_dir" "$models_dir" "$custom_nodes_dir"
+mkdir -p "$workflows_dir" "$models_dir" "$custom_nodes_dir"
 
 required_failures=0
 optional_failures=0
@@ -345,10 +344,6 @@ if (( DRY_RUN == 0 )); then
   workflow_target="${workflows_dir}/${workflow_file_name}"
   if ! download_to_file "$workflow_file_url" "$workflow_target" 0; then
     echo "Failed to download workflow file: ${workflow_file_url}" >&2
-    exit 4
-  fi
-  if ! cp -f "$workflow_target" "${active_dir}/${workflow_file_name}"; then
-    echo "Failed to activate workflow file" >&2
     exit 4
   fi
 else
