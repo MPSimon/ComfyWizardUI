@@ -22,7 +22,12 @@ export type WaitlistEventName =
   | "cta_waitlist_click"
   | "waitlist_signup_submitted"
   | "discord_join_clicked"
-  | "install_intent_clicked";
+  | "install_intent_clicked"
+  | "tour_started"
+  | "tour_step_viewed"
+  | "tour_completed"
+  | "tour_skipped"
+  | "tour_reopened_help";
 
 export type WaitlistEvent = {
   id: string;

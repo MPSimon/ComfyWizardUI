@@ -5,7 +5,7 @@ type WaitlistEventMetadata = {
   utmMedium?: string;
   utmCampaign?: string;
   utmContent?: string;
-};
+} & Record<string, string | undefined>;
 
 type GtagEventParams = {
   funnel_id: WaitlistFunnelId;
@@ -13,7 +13,7 @@ type GtagEventParams = {
   utm_medium?: string;
   utm_campaign?: string;
   utm_content?: string;
-};
+} & Record<string, string | undefined>;
 
 declare global {
   interface Window {
@@ -36,5 +36,7 @@ export function trackGaWaitlistEvent(
     utm_medium: metadata?.utmMedium ?? "",
     utm_campaign: metadata?.utmCampaign ?? "",
     utm_content: metadata?.utmContent ?? "",
+    step_id: metadata?.step_id ?? "",
+    tour_id: metadata?.tour_id ?? "",
   });
 }

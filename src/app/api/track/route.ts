@@ -11,6 +11,11 @@ const EVENT_NAMES: WaitlistEventName[] = [
   "waitlist_signup_submitted",
   "discord_join_clicked",
   "install_intent_clicked",
+  "tour_started",
+  "tour_step_viewed",
+  "tour_completed",
+  "tour_skipped",
+  "tour_reopened_help",
 ];
 
 const FUNNELS: WaitlistFunnelId[] = ["install", "hub"];

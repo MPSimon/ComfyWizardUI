@@ -9,12 +9,14 @@ type QuickstartPanelProps = {
   runpodTemplateUrl: string;
   installCommandPreview: string;
   versions?: WorkflowVersion[];
+  tourEnabled?: boolean;
 };
 
 export function QuickstartPanel({
   runpodTemplateUrl,
   installCommandPreview,
   versions = [],
+  tourEnabled = false,
 }: QuickstartPanelProps) {
   return (
     <Card className="rounded-2xl gap-3 py-4">
@@ -25,13 +27,13 @@ export function QuickstartPanel({
         </Badge>
       </CardHeader>
       <CardContent className="space-y-2 px-4">
-        <Button asChild className="w-full justify-between">
+        <Button asChild className="w-full justify-between" data-tour={tourEnabled ? "runpod-template" : undefined}>
           <a href={runpodTemplateUrl} target="_blank" rel="noreferrer">
             Open RunPod template <ExternalLink className="h-4 w-4" />
           </a>
         </Button>
 
-        <div className="rounded-xl border bg-muted/40 p-3">
+        <div className="rounded-xl border bg-muted/40 p-3" data-tour={tourEnabled ? "quickstart-command" : undefined}>
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Install command preview
           </p>

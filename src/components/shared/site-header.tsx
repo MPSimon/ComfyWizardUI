@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 
 type SiteHeaderProps = {
@@ -7,6 +10,17 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ basePath, variantLabel }: SiteHeaderProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  function openHelpTour() {
+    if (pathname === "/workflow/sample") {
+      window.dispatchEvent(new CustomEvent("cw:open-tour", { detail: { tourId: "sample-workflow" } }));
+      return;
+    }
+    router.push("/workflow/sample?tour=1");
+  }
+
   return (
     <header className="sticky top-0 z-20 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 md:px-6">
@@ -18,6 +32,13 @@ export function SiteHeader({ basePath, variantLabel }: SiteHeaderProps) {
         </div>
         <nav className="flex items-center gap-3 text-sm text-muted-foreground">
           <Link href="/workflows">Workflow Hub</Link>
+          <button
+            type="button"
+            onClick={openHelpTour}
+            className="rounded-md border border-border px-3 py-1.5 font-medium text-foreground transition-colors hover:bg-accent"
+          >
+            Help
+          </button>
           <Link
             href="/waitlist"
             className="rounded-md border border-border px-3 py-1.5 font-medium text-foreground transition-colors hover:bg-accent"
