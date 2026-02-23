@@ -1,28 +1,39 @@
-import { Copy, ExternalLink } from "lucide-react";
+"use client";
 
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
+import { Check, Copy, ExternalLink } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { WorkflowVersion } from "@/lib/types/workflow";
 
 type QuickstartPanelProps = {
   runpodTemplateUrl: string;
   installCommandPreview: string;
-  versions?: WorkflowVersion[];
 };
 
-export function QuickstartPanel({
-  runpodTemplateUrl,
-  installCommandPreview,
-  versions = [],
-}: QuickstartPanelProps) {
+export function QuickstartPanel({ runpodTemplateUrl, installCommandPreview }: QuickstartPanelProps) {
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
+
+  useEffect(() => {
+    if (copyState === "idle") return;
+    const timer = window.setTimeout(() => setCopyState("idle"), 1800);
+    return () => window.clearTimeout(timer);
+  }, [copyState]);
+
+  async function handleCopyCommand() {
+    try {
+      await navigator.clipboard.writeText(installCommandPreview);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+  }
+
   return (
     <Card className="rounded-2xl gap-3 py-4">
       <CardHeader className="space-y-1 px-4 pb-0">
         <CardTitle className="text-base">Quickstart Install</CardTitle>
-        <Badge variant="secondary" className="w-fit">
-          One-command install
-        </Badge>
       </CardHeader>
       <CardContent className="space-y-2 px-4">
         <Button asChild className="w-full justify-between">
@@ -38,24 +49,47 @@ export function QuickstartPanel({
           <code className="block whitespace-pre-wrap break-all text-xs">{installCommandPreview}</code>
         </div>
 
-        {versions.length > 0 ? (
-          <div className="rounded-xl border p-3">
-            <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Versions
-            </p>
-            <div className="space-y-2">
-              {versions.map((version) => (
-                <div key={version.id} className="text-xs">
-                  <p className="font-medium">v{version.version}</p>
-                  <p className="text-muted-foreground">{version.notes}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        <Button variant="outline" className="w-full justify-between" disabled>
-          Copy command <Copy className="h-4 w-4" />
+        <Button
+          variant="outline"
+          className="w-full justify-between overflow-hidden transition-colors hover:bg-muted/60"
+          onClick={handleCopyCommand}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {copyState === "copied" ? (
+              <motion.span
+                key="copied"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.16 }}
+                className="inline-flex items-center gap-2 text-emerald-500"
+              >
+                Copied <Check className="h-4 w-4" />
+              </motion.span>
+            ) : copyState === "failed" ? (
+              <motion.span
+                key="failed"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.16 }}
+                className="inline-flex items-center gap-2 text-red-500"
+              >
+                Copy failed <Copy className="h-4 w-4" />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="idle"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.16 }}
+                className="inline-flex items-center gap-2"
+              >
+                Copy command <Copy className="h-4 w-4" />
+              </motion.span>
+            )}
+          </AnimatePresence>
         </Button>
       </CardContent>
     </Card>

@@ -102,7 +102,6 @@ export default async function DetailPage({ params }: DetailPageProps) {
             <QuickstartPanel
               runpodTemplateUrl={workflow.quickstart.runpodTemplateUrl}
               installCommandPreview={workflow.quickstart.installCommandPreview}
-              versions={workflow.versions}
             />
             <Card className="mt-4 rounded-2xl gap-3 py-4">
               <CardHeader className="px-4 pb-0">
@@ -135,6 +134,21 @@ export default async function DetailPage({ params }: DetailPageProps) {
               </div>
             </CardContent>
           </Card>
+          {workflow.versions.length > 0 ? (
+            <Card className="mt-4 rounded-2xl gap-3 py-4">
+              <CardHeader className="px-4 pb-0">
+                <CardTitle className="text-base">Versions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 px-4">
+                {workflow.versions.map((version) => (
+                  <div key={version.id} className="rounded-lg border p-3 text-sm">
+                    <p className="font-medium">v{version.version}</p>
+                    <p className="mt-1 text-muted-foreground">{version.notes}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          ) : null}
         </aside>
       </div>
     </main>

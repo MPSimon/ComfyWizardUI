@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { trackGaWaitlistEvent } from "@/lib/analytics";
-import { setOnboardingSeen } from "@/lib/onboarding/storage";
+import { getOnboardingState, setOnboardingSeen } from "@/lib/onboarding/storage";
 
 export function WorkflowsHubOnboarding() {
   const router = useRouter();
@@ -15,7 +15,9 @@ export function WorkflowsHubOnboarding() {
   const trackedOpenRef = useRef(false);
   const isOpen = useMemo(() => {
     const forcedByQuery = searchParams.get("tour") === "1";
+    const state = getOnboardingState();
     if (!forcedByQuery) return false;
+    if (state.completed) return false;
     if (dismissed) return false;
     return true;
   }, [dismissed, searchParams]);
