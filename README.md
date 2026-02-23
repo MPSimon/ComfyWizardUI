@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ComfyWizardUI
 
-## Getting Started
+Customer-facing MVP for a ComfyUI workflow hub + waitlist launch.
 
-First, run the development server:
+## Current surface
+
+- Workflow hub: `/`
+- Workflow detail: `/workflow/[slug]`
+- Waitlist (canonical): `/waitlist/alt`
+- Convenience redirects:
+  - `/waitlist` -> `/waitlist/alt`
+  - `/waitlist/install` -> `/waitlist/alt?funnel=install`
+  - `/waitlist/hub` -> `/waitlist/alt?funnel=hub`
+
+Current workflow catalog is intentionally limited to one sample listing.
+
+## What is implemented
+
+- Full-card clickable workflow cards (accessible single-link pattern)
+- Dependency-aware workflow detail page
+- Join modal waitlist flow (`Join now!`)
+- Waitlist tracking + signup APIs
+- Anti-spam rate limiting on waitlist APIs
+- UTM capture (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`)
+- Waitlist storage with Upstash Redis support (Vercel-ready) + local JSON fallback
+- Local Civitai brand asset (`/public/brands/civitai.png`)
+
+## Waitlist storage
+
+- Production (recommended): Upstash Redis via environment variables:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+UPSTASH_REDIS_REST_URL=...
+UPSTASH_REDIS_REST_TOKEN=...
+WAITLIST_STORE_KEY=comfywizard:waitlist:store
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Local fallback (if Upstash vars are missing): data is persisted to `/.data/waitlist-store.json`.
+- You can override local fallback directory with:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+WAITLIST_DATA_DIR=/absolute/path/to/storage
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Analytics (GA4)
 
-## Learn More
+- GA4 is wired with Measurement ID: `G-FJKYKD6BSL`
+- Script is injected in:
+  - `/Users/max/www/ComfyWizardUI/src/components/shared/google-analytics.tsx`
+- Events sent to GA4:
+  - `lp_view`
+  - `cta_waitlist_click`
+  - `waitlist_signup_submitted`
+  - `discord_join_clicked`
+  - `install_intent_clicked`
 
-To learn more about Next.js, take a look at the following resources:
+Use GA4 Realtime report to verify event flow while testing:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Google Analytics Realtime](https://analytics.google.com/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Analytics (Microsoft Clarity)
 
-## Deploy on Vercel
+- Clarity is wired with Project ID: `vlrsb6sbtl`
+- Script is injected in:
+  - `/Users/max/www/ComfyWizardUI/src/components/shared/microsoft-clarity.tsx`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Use Clarity dashboard to verify recordings and heatmaps:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Microsoft Clarity](https://clarity.microsoft.com/)
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
+
+Open:
+- `http://localhost:3000/`
+- `http://localhost:3000/workflow/sample`
+- `http://localhost:3000/waitlist/alt`
+
+## Quality checks
+
+```bash
+npm run lint
+npm test
+npm run build
+```
+
+## Strategy docs
+
+- `docs/PRODUCT_STRATEGY.md`
+- `docs/MARKETING_TRACTION_PLAN.md`
+- `docs/WAITLIST_PAGE_PLAYBOOK.md`
+- `docs/INTERNAL_BUSINESS_NOTES.md`
+
+## Data adapter contract
+
+- `getWorkflowList(params)`
+- `getWorkflowBySlug(slug)`
+- `getWorkflowDependencies(workflowVersionId)`
+
+Current adapter is JSON-backed and can be swapped later.

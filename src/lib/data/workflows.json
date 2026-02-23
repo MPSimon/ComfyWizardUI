@@ -1,0 +1,127 @@
+[
+  {
+    "id": "wf-sample-01",
+    "slug": "sample",
+    "title": "PhotoFlow Wan T2I v1.0",
+    "summary": "Creator-focused WAN text-to-image workflow with realistic output and structured detail passes.",
+    "description": "A practical WAN 2.2 text-to-image workflow tuned for realism and clean enhancement stages. This sample listing is based on your imported PhotoFlow JSON and shows a creator-ready dependency breakdown with source links.",
+    "stack": "wan",
+    "coverImageUrl": "/workflow-thumbs/photoflow-wan-t2i-v1-workflow.png",
+    "isVerified": true,
+    "updatedAt": "2026-02-21T09:00:00.000Z",
+    "tags": [
+      "sample",
+      "creator",
+      "realism",
+      "wan2.2"
+    ],
+    "versions": [
+      {
+        "id": "wf-sample-01-v100",
+        "version": "1.0.0",
+        "createdAt": "2026-02-21T09:00:00.000Z",
+        "notes": "Initial creator listing from PhotoFlow_Wan_T2I_v1.0.json"
+      }
+    ],
+    "quickstart": {
+      "runpodTemplateUrl": "https://console.runpod.io/deploy?template=n221r30lq8&ref=f3a44gdl",
+      "installCommandPreview": "comfywizard install --workflow sample --target runpod"
+    },
+    "dependencies": [
+      {
+        "id": "dep-sample-01",
+        "source": "civitai",
+        "filename": "wanVideo22_t2vLowNoise14B.safetensors",
+        "targetRelDir": "diffusion_models",
+        "sourceUrl": "https://civitai.com/models/1817671?modelVersionId=2057100",
+        "required": true
+      },
+      {
+        "id": "dep-sample-02",
+        "source": "huggingface",
+        "repoId": "bullerwins/Wan2.2-T2V-A14B-GGUF",
+        "filename": "wan2.2_t2v_low_noise_14B_Q8_0.gguf",
+        "targetRelDir": "diffusion_models",
+        "sourceUrl": "https://huggingface.co/bullerwins/Wan2.2-T2V-A14B-GGUF/blob/main/wan2.2_t2v_low_noise_14B_Q8_0.gguf?download=true",
+        "required": true
+      },
+      {
+        "id": "dep-sample-03",
+        "source": "huggingface",
+        "repoId": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+        "filename": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "targetRelDir": "text_encoders",
+        "sourceUrl": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors?download=true",
+        "required": true
+      },
+      {
+        "id": "dep-sample-04",
+        "source": "huggingface",
+        "repoId": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+        "filename": "wan_2.1_vae.safetensors",
+        "targetRelDir": "vae",
+        "sourceUrl": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors?download=true",
+        "required": true
+      },
+      {
+        "id": "dep-sample-05",
+        "source": "huggingface",
+        "repoId": "Kijai/WanVideo_comfy",
+        "filename": "Wan2.2-Lightning_T2V-A14B-4steps-lora_LOW_fp16.safetensors",
+        "targetRelDir": "loras",
+        "sourceUrl": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan22-Lightning/Wan2.2-Lightning_T2V-A14B-4steps-lora_LOW_fp16.safetensors?download=true",
+        "required": true
+      },
+      {
+        "id": "dep-sample-06",
+        "source": "huggingface",
+        "repoId": "alibaba-pai/Wan2.1-Fun-Reward-LoRAs",
+        "filename": "Wan2.1-Fun-14B-InP-MPS.safetensors",
+        "targetRelDir": "loras",
+        "sourceUrl": "https://huggingface.co/alibaba-pai/Wan2.1-Fun-Reward-LoRAs/blob/main/Wan2.1-Fun-14B-InP-MPS.safetensors?download=true",
+        "required": true
+      },
+      {
+        "id": "dep-sample-07",
+        "source": "huggingface",
+        "repoId": "Kijai/WanVideo_comfy",
+        "filename": "Wan21_T2V_14B_MoviiGen_lora_rank32_fp16.safetensors",
+        "targetRelDir": "loras",
+        "sourceUrl": "https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_T2V_14B_MoviiGen_lora_rank32_fp16.safetensors?download=true",
+        "required": true
+      },
+      {
+        "id": "dep-sample-08",
+        "source": "civitai",
+        "filename": "WAN2.1_SmartphoneSnapshotPhotoReality_v1_by-AI_Characters.safetensors",
+        "targetRelDir": "loras",
+        "sourceUrl": "https://civitai.com/models/1763826/wan21-smartphone-snapshot-photo-reality-style",
+        "required": true
+      },
+      {
+        "id": "dep-sample-09",
+        "source": "civitai",
+        "filename": "Lenovo.safetensors",
+        "targetRelDir": "loras",
+        "sourceUrl": "https://civitai.com/models/1662740?modelVersionId=2066914",
+        "required": true
+      },
+      {
+        "id": "dep-sample-10",
+        "source": "private",
+        "filename": "4x_UniversalUpscalerV2-Neutral_115000_swaG.pth",
+        "targetRelDir": "upscale_models",
+        "sourceUrl": "https://openmodeldb.info/models/4x-UniversalUpscalerV2-Neutral",
+        "required": true
+      },
+      {
+        "id": "dep-sample-11",
+        "source": "private",
+        "filename": "Eyeful_v2-Paired.pt",
+        "targetRelDir": "ultralytics/bbox",
+        "sourceUrl": "https://huggingface.co/Tenofas/ComfyUI/blob/main/ultralytics/bbox/Eyeful_v2-Paired.pt",
+        "required": true
+      }
+    ]
+  }
+]
