@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, X } from "lucide-react";
 import { motion } from "motion/react";
@@ -140,14 +139,16 @@ export function WaitlistOnepageAlt({ totalSignups, funnelId }: WaitlistOnepageAl
                 Join now!
               </Button>
               <Button
-                asChild
                 size="lg"
                 variant="outline"
-                className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800"
+                className="border-zinc-700 bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:text-white"
+                onClick={() => {
+                  window.location.assign("/workflows?tour=1");
+                }}
               >
-                <Link href="/workflows?tour=1" className="inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-2">
                   See sample install flow <ArrowRight className="h-4 w-4" />
-                </Link>
+                </span>
               </Button>
             </div>
 

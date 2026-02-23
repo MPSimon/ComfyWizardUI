@@ -21,7 +21,7 @@ export function SiteHeader({ basePath, variantLabel }: SiteHeaderProps) {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-3">
           <Link href={basePath} className="text-lg font-semibold tracking-tight">
-            ComfyWizardUI
+            ComfyWizard
           </Link>
           <Badge variant="secondary">{variantLabel}</Badge>
         </div>

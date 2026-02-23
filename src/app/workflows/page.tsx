@@ -18,7 +18,7 @@ export default async function WorkflowsPage() {
       <GalleryShell
         workflows={workflows}
         hrefBase=""
-        heading="Install-Ready Workflow Hub"
+        heading="One-click Install Workflows"
         subheading="Browse creator workflows with clear dependencies so you can launch faster on fresh ComfyUI setups."
       />
     </VariantAShell>

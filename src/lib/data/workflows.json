@@ -2,7 +2,7 @@
   {
     "id": "wf-sample-01",
     "slug": "sample",
-    "title": "[SAMPLE] PhotoFlow Wan T2I v1.0",
+    "title": "PhotoFlow Wan T2I v1.0",
     "summary": "Creator-focused WAN text-to-image workflow with realistic output and structured detail passes.",
     "description": "A practical WAN 2.2 text-to-image workflow tuned for realism and clean enhancement stages. This sample listing is based on your imported PhotoFlow JSON and shows a creator-ready dependency breakdown with source links.",
     "stack": "wan",

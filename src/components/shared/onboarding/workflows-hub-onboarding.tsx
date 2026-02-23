@@ -5,25 +5,20 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { trackGaWaitlistEvent } from "@/lib/analytics";
-import { getOnboardingState, setOnboardingSeen } from "@/lib/onboarding/storage";
+import { setOnboardingSeen } from "@/lib/onboarding/storage";
 
 export function WorkflowsHubOnboarding() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [dismissed, setDismissed] = useState(false);
+  const [targetRect, setTargetRect] = useState<DOMRect | null>(null);
   const trackedOpenRef = useRef(false);
   const isOpen = useMemo(() => {
-    const shouldOpen = searchParams.get("tour") === "1";
-    const state = getOnboardingState();
-    return shouldOpen && !state.completed && !dismissed;
+    const forcedByQuery = searchParams.get("tour") === "1";
+    if (!forcedByQuery) return false;
+    if (dismissed) return false;
+    return true;
   }, [dismissed, searchParams]);
-
-  const targetRect = useMemo(() => {
-    if (!isOpen || typeof window === "undefined") return null;
-    const el = document.querySelector('[data-tour="hub-sample-card"]');
-    if (!el) return null;
-    return el.getBoundingClientRect();
-  }, [isOpen]);
 
   async function track(
     name: "tour_started" | "tour_step_viewed" | "tour_skipped" | "tour_reopened_help",
@@ -45,7 +40,74 @@ export function WorkflowsHubOnboarding() {
     void track("tour_step_viewed", { step_id: "select-sample-workflow", tour_id: "sample-workflow" });
   }, [isOpen]);
 
-  if (!isOpen || !targetRect) return null;
+  useEffect(() => {
+    if (!isOpen) return;
+
+    let rafId = 0;
+    let cancelled = false;
+
+    const findTarget = () => {
+      if (cancelled) return;
+      const el = document.querySelector('[data-tour="hub-sample-card"]');
+      if (el) {
+        setTargetRect(el.getBoundingClientRect());
+        return;
+      }
+      rafId = window.requestAnimationFrame(findTarget);
+    };
+
+    findTarget();
+
+    return () => {
+      cancelled = true;
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || !targetRect) return;
+
+    const updateRect = () => {
+      const el = document.querySelector('[data-tour="hub-sample-card"]');
+      if (!el) return;
+      setTargetRect(el.getBoundingClientRect());
+    };
+
+    window.addEventListener("resize", updateRect);
+    window.addEventListener("scroll", updateRect, { passive: true });
+    return () => {
+      window.removeEventListener("resize", updateRect);
+      window.removeEventListener("scroll", updateRect);
+    };
+  }, [isOpen, targetRect]);
+
+  if (!isOpen) return null;
+
+  if (!targetRect) {
+    return (
+      <div className="fixed inset-0 z-[90]">
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute left-1/2 top-1/2 w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-zinc-700 bg-zinc-900/95 p-4 text-zinc-100 shadow-2xl">
+          <p className="text-xs uppercase tracking-wide text-zinc-400">Step 1 of 4</p>
+          <h3 className="mt-1 text-base font-semibold">Select the sample workflow</h3>
+          <p className="mt-2 text-sm text-zinc-300">Preparing the guide...</p>
+          <div className="mt-4 flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="ml-auto border-zinc-700 bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100"
+              onClick={() => {
+                setDismissed(true);
+                void track("tour_skipped", { step_id: "select-sample-workflow", tour_id: "sample-workflow" });
+              }}
+            >
+              Skip
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const tooltipWidth = 360;
   const left = Math.max(16, Math.min(targetRect.left, window.innerWidth - tooltipWidth - 16));
