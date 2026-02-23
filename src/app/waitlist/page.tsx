@@ -1,10 +1,12 @@
-import { redirect } from "next/navigation";
+import { WaitlistOnepageAlt } from "@/components/shared/waitlist-onepage-alt";
+import { getDashboardMetrics } from "@/lib/waitlist-store";
+import type { WaitlistFunnelId } from "@/lib/types/waitlist";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "ComfyWizardUI Waitlist",
-  description: "Join the ComfyWizardUI early access waitlist.",
+  title: "ComfyWizard Waitlist",
+  description: "Join the ComfyWizard early access waitlist.",
 };
 
 type WaitlistPageProps = {
@@ -13,7 +15,8 @@ type WaitlistPageProps = {
 
 export default async function WaitlistPage({ searchParams }: WaitlistPageProps) {
   const params = await searchParams;
-  const funnel = params.funnel === "hub" ? "hub" : "install";
+  const metrics = await getDashboardMetrics();
+  const funnelId: WaitlistFunnelId = params.funnel === "hub" ? "hub" : "install";
 
-  redirect(`/waitlist/alt?funnel=${funnel}`);
+  return <WaitlistOnepageAlt totalSignups={metrics.totals.signups} funnelId={funnelId} />;
 }

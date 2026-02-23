@@ -222,7 +222,7 @@ export function WaitlistForm({
                 onClick={trackInstallIntent}
                 asChild
               >
-                <Link href="/">I want 1-click install first</Link>
+                <Link href="/workflows">I want 1-click install first</Link>
               </Button>
             ) : null}
           </div>

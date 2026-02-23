@@ -32,7 +32,7 @@ Optional:
 
 ## 5) Post-deploy checks
 
-1. Open `/waitlist/alt?funnel=install&utm_source=reddit&utm_medium=social&utm_campaign=launch&utm_content=post_a`
+1. Open `/waitlist?funnel=install&utm_source=reddit&utm_medium=social&utm_campaign=launch&utm_content=post_a`
 2. Submit waitlist form.
 3. Verify:
    - GA4 Realtime events appear.

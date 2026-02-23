@@ -37,7 +37,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
 
   return (
     <VariantAShell>
-      <SiteHeader basePath="/" variantLabel="Core Experience" />
+      <SiteHeader basePath="/workflows" variantLabel="Core Experience" />
       <main className="mx-auto w-full max-w-6xl space-y-6 px-4 py-8 md:px-6">
         <div className="grid gap-6 md:grid-cols-[1fr_320px]">
           <section className="space-y-6">

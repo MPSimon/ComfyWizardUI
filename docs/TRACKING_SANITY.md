@@ -14,13 +14,13 @@ npm run dev
 Install funnel:
 
 ```text
-http://localhost:3000/waitlist/alt?funnel=install&utm_source=reddit&utm_medium=social&utm_campaign=waitlist_launch&utm_content=post_a
+http://localhost:3000/waitlist?funnel=install&utm_source=reddit&utm_medium=social&utm_campaign=waitlist_launch&utm_content=post_a
 ```
 
 Hub funnel:
 
 ```text
-http://localhost:3000/waitlist/alt?funnel=hub&utm_source=x&utm_medium=social&utm_campaign=waitlist_launch&utm_content=post_b
+http://localhost:3000/waitlist?funnel=hub&utm_source=x&utm_medium=social&utm_campaign=waitlist_launch&utm_content=post_b
 ```
 
 ## 3) Verify key events fire

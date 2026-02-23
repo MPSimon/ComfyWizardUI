@@ -3,7 +3,7 @@
 ## Must-have before posting
 
 - [ ] Real Discord invite configured (done in code)
-- [ ] Waitlist destination is canonical (`/waitlist/alt`)
+- [ ] Waitlist destination is canonical (`/waitlist`)
 - [ ] Waitlist data persistence enabled (`/.data/waitlist-store.json` writable on host)
 - [ ] UTM links prepared for each channel/post
 - [ ] Quickstart copy is non-placeholder
@@ -20,7 +20,7 @@
 ## UTM template
 
 Use links like:
-`https://yourdomain.com/waitlist/alt?funnel=install&utm_source=x&utm_medium=social&utm_campaign=launch_week1&utm_content=post_a`
+`https://yourdomain.com/waitlist?funnel=install&utm_source=x&utm_medium=social&utm_campaign=launch_week1&utm_content=post_a`
 
 ## 7-day rollout
 

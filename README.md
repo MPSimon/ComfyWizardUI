@@ -4,13 +4,14 @@ Customer-facing MVP for a ComfyUI workflow hub + waitlist launch.
 
 ## Current surface
 
-- Workflow hub: `/`
+- Landing redirect: `/` -> `/waitlist`
+- Waitlist (canonical): `/waitlist`
+- Workflow hub: `/workflows`
 - Workflow detail: `/workflow/[slug]`
-- Waitlist (canonical): `/waitlist/alt`
 - Convenience redirects:
-  - `/waitlist` -> `/waitlist/alt`
-  - `/waitlist/install` -> `/waitlist/alt?funnel=install`
-  - `/waitlist/hub` -> `/waitlist/alt?funnel=hub`
+  - `/waitlist/alt` -> `/waitlist`
+  - `/waitlist/install` -> `/waitlist?funnel=install`
+  - `/waitlist/hub` -> `/waitlist?funnel=hub`
 
 Current workflow catalog is intentionally limited to one sample listing.
 
@@ -76,9 +77,9 @@ npm run dev
 ```
 
 Open:
-- `http://localhost:3000/`
+- `http://localhost:3000/waitlist`
+- `http://localhost:3000/workflows`
 - `http://localhost:3000/workflow/sample`
-- `http://localhost:3000/waitlist/alt`
 
 ## Quality checks
 

@@ -121,7 +121,7 @@ export function WaitlistOnepageAlt({ totalSignups, funnelId }: WaitlistOnepageAl
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="mx-auto my-auto max-w-4xl text-center"
           >
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">ComfyWizardUI Early Access</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">ComfyWizard Early Access</p>
             <h1 className="mt-4 text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
               Stop wasting hours
               <br />
@@ -145,8 +145,8 @@ export function WaitlistOnepageAlt({ totalSignups, funnelId }: WaitlistOnepageAl
                 variant="outline"
                 className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800"
               >
-                <Link href="/workflow/sample" className="inline-flex items-center gap-2">
-                  View sample workflow hub <ArrowRight className="h-4 w-4" />
+                <Link href="/workflows" className="inline-flex items-center gap-2">
+                  View sample listings <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
             </div>

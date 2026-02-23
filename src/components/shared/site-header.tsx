@@ -16,9 +16,12 @@ export function SiteHeader({ basePath, variantLabel }: SiteHeaderProps) {
           </Link>
           <Badge variant="secondary">{variantLabel}</Badge>
         </div>
-        <nav className="flex items-center gap-4 text-sm text-muted-foreground">
-          <Link href="/">Workflow Hub</Link>
-          <Link href="/waitlist/alt" className="text-foreground">
+        <nav className="flex items-center gap-3 text-sm text-muted-foreground">
+          <Link href="/workflows">Workflow Hub</Link>
+          <Link
+            href="/waitlist"
+            className="rounded-md border border-border px-3 py-1.5 font-medium text-foreground transition-colors hover:bg-accent"
+          >
             Waitlist
           </Link>
         </nav>
