@@ -63,7 +63,16 @@ need_bin() {
 need_bin curl
 need_bin jq
 need_bin git
-need_bin python
+
+PYTHON_BIN=""
+if command -v python >/dev/null 2>&1; then
+  PYTHON_BIN="python"
+elif command -v python3 >/dev/null 2>&1; then
+  PYTHON_BIN="python3"
+else
+  echo "Missing required command: python or python3" >&2
+  exit 3
+fi
 
 sha256_file() {
   local file="$1"
@@ -315,7 +324,7 @@ install_custom_node() {
   fi
 
   if [[ -n "$req_file" && -f "${node_dir}/${req_file}" ]]; then
-    if ! python -m pip install -r "${node_dir}/${req_file}" >/tmp/workflow-installer-pip.log 2>&1; then
+    if ! "$PYTHON_BIN" -m pip install -r "${node_dir}/${req_file}" >/tmp/workflow-installer-pip.log 2>&1; then
       echo "custom node requirements install failed: ${name}" >&2
       if [[ "$required" == "true" ]]; then
         required_failures=$((required_failures + 1))
