@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0",
+  "workflow": {
+    "slug": "sample",
+    "version": "1.0.0",
+    "stack": "wan",
+    "workflowFileUrl": "https://comfy.bitreq.nl/stacks/wan/workflows/PhotoFlow_Wan_T2I_v1.0.json",
+    "workflowFileName": "PhotoFlow_Wan_T2I_v1.0.json"
+  },
+  "dependencies": [
+    {
+      "source": "civitai",
+      "modelVersionId": "2057100",
+      "filename": "wanVideo22_t2vLowNoise14B.safetensors",
+      "targetRelDir": "diffusion_models",
+      "required": true
+    },
+    {
+      "source": "huggingface",
+      "repoId": "bullerwins/Wan2.2-T2V-A14B-GGUF",
+      "filename": "wan2.2_t2v_low_noise_14B_Q8_0.gguf",
+      "targetRelDir": "diffusion_models",
+      "revision": "main",
+      "required": true
+    },
+    {
+      "source": "huggingface",
+      "repoId": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+      "filename": "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "targetRelDir": "text_encoders",
+      "revision": "main",
+      "required": true
+    },
+    {
+      "source": "huggingface",
+      "repoId": "Comfy-Org/Wan_2.1_ComfyUI_repackaged",
+      "filename": "split_files/vae/wan_2.1_vae.safetensors",
+      "targetRelDir": "vae",
+      "revision": "main",
+      "required": true
+    },
+    {
+      "source": "huggingface",
+      "repoId": "Kijai/WanVideo_comfy",
+      "filename": "Wan22-Lightning/Wan2.2-Lightning_T2V-A14B-4steps-lora_LOW_fp16.safetensors",
+      "targetRelDir": "loras",
+      "revision": "main",
+      "required": true
+    },
+    {
+      "source": "huggingface",
+      "repoId": "alibaba-pai/Wan2.1-Fun-Reward-LoRAs",
+      "filename": "Wan2.1-Fun-14B-InP-MPS.safetensors",
+      "targetRelDir": "loras",
+      "revision": "main",
+      "required": true
+    },
+    {
+      "source": "huggingface",
+      "repoId": "Kijai/WanVideo_comfy",
+      "filename": "Wan21_T2V_14B_MoviiGen_lora_rank32_fp16.safetensors",
+      "targetRelDir": "loras",
+      "revision": "main",
+      "required": true
+    },
+    {
+      "source": "url",
+      "url": "https://civitai.com/models/1763826/wan21-smartphone-snapshot-photo-reality-style",
+      "filename": "WAN2.1_SmartphoneSnapshotPhotoReality_v1_by-AI_Characters.safetensors",
+      "targetRelDir": "loras",
+      "required": true
+    },
+    {
+      "source": "civitai",
+      "modelVersionId": "2066914",
+      "filename": "Lenovo.safetensors",
+      "targetRelDir": "loras",
+      "required": true
+    },
+    {
+      "source": "url",
+      "url": "https://openmodeldb.info/models/4x-UniversalUpscalerV2-Neutral",
+      "filename": "4x_UniversalUpscalerV2-Neutral_115000_swaG.pth",
+      "targetRelDir": "upscale_models",
+      "required": true
+    },
+    {
+      "source": "url",
+      "url": "https://huggingface.co/Tenofas/ComfyUI/blob/main/ultralytics/bbox/Eyeful_v2-Paired.pt",
+      "filename": "Eyeful_v2-Paired.pt",
+      "targetRelDir": "ultralytics/bbox",
+      "required": true
+    }
+  ],
+  "customNodes": [
+    {
+      "name": "ComfyUI-WanVideoWrapper",
+      "repoUrl": "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
+      "required": false,
+      "requirementsFile": "requirements.txt"
+    },
+    {
+      "name": "ComfyUI-KJNodes",
+      "repoUrl": "https://github.com/kijai/ComfyUI-KJNodes.git",
+      "required": false,
+      "requirementsFile": "requirements.txt"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "repoUrl": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
+      "required": false,
+      "requirementsFile": "requirements.txt"
+    }
+  ]
+}

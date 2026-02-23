@@ -21,7 +21,7 @@ export function QuickstartPanel({
       <CardHeader className="space-y-1 px-4 pb-0">
         <CardTitle className="text-base">Quickstart Install (Preview)</CardTitle>
         <Badge variant="secondary" className="w-fit">
-          MVP preview only
+          One-command install
         </Badge>
       </CardHeader>
       <CardContent className="space-y-2 px-4">

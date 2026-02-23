@@ -8,6 +8,8 @@ Customer-facing MVP for a ComfyUI workflow hub + waitlist launch.
 - Waitlist (canonical): `/waitlist`
 - Workflow hub: `/workflows`
 - Workflow detail: `/workflow/[slug]`
+- Install API script: `/api/install/script`
+- Install manifest API: `/api/install/workflows/[slug]?version=<semver>`
 - Convenience redirects:
   - `/waitlist/alt` -> `/waitlist`
   - `/waitlist/install` -> `/waitlist?funnel=install`
@@ -42,6 +44,27 @@ WAITLIST_STORE_KEY=comfywizard:waitlist:store
 ```bash
 WAITLIST_DATA_DIR=/absolute/path/to/storage
 ```
+
+## One-command installer
+
+The workflow detail page now shows a real install command, for example:
+
+```bash
+curl -fsSL https://www.comfywizard.tech/api/install/script | bash -s -- --workflow sample --version 1.0.0
+```
+
+Installer behavior:
+
+- Fetches install manifest from `/api/install/workflows/<slug>`
+- Downloads workflow JSON + dependencies to ComfyUI folders
+- Installs custom nodes as best-effort
+- Uses deterministic exit codes (`0`, `2`, `3`, `4`)
+
+Optional runtime env vars:
+
+- `HF_TOKEN` for gated Hugging Face assets
+- `CIVITAI_TOKEN` for Civitai downloads
+- `ARTIFACT_AUTH` for private URL sources
 
 ## Analytics (GA4)
 

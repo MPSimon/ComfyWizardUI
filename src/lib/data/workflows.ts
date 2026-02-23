@@ -9,6 +9,10 @@ import { filterAndSortWorkflows } from "@/features/filters/workflow-filters";
 
 const records = rawWorkflows as WorkflowRecord[];
 
+function buildInstallCommand(slug: string, version: string) {
+  return `curl -fsSL https://www.comfywizard.tech/api/install/script | bash -s -- --workflow ${slug} --version ${version}`;
+}
+
 function toListItem(record: WorkflowRecord): WorkflowListItem {
   const required = record.dependencies.filter((dependency) => dependency.required).length;
   const optional = record.dependencies.length - required;
@@ -55,7 +59,10 @@ export async function getWorkflowBySlug(slug: string): Promise<WorkflowDetail | 
     versions: record.versions,
     dependenciesRequired,
     dependenciesOptional,
-    quickstart: record.quickstart,
+    quickstart: {
+      ...record.quickstart,
+      installCommandPreview: buildInstallCommand(record.slug, workflow.latestVersion),
+    },
   };
 }
 
