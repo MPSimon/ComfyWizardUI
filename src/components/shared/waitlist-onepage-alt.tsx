@@ -10,15 +10,14 @@ import { trackGaWaitlistEvent } from "@/lib/analytics";
 import type { WaitlistFunnelId } from "@/lib/types/waitlist";
 
 type WaitlistOnepageAltProps = {
-  totalSignups: number;
   funnelId: WaitlistFunnelId;
 };
 
-export function WaitlistOnepageAlt({ totalSignups, funnelId }: WaitlistOnepageAltProps) {
+export function WaitlistOnepageAlt({ funnelId }: WaitlistOnepageAltProps) {
   const [joinModalOpen, setJoinModalOpen] = useState(false);
   const joinButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const launchSignal = totalSignups > 0 ? `${totalSignups} early users joined` : "Early access now open";
+  const launchSignal = "Easy workflow deployment";
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

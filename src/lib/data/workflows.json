@@ -15,6 +15,11 @@
       "realism",
       "wan2.2"
     ],
+    "origin": {
+      "label": "PhotoFlow Wan T2I v1.0",
+      "url": "https://civitai.com/models/1376005?modelVersionId=2139865",
+      "source": "civitai"
+    },
     "versions": [
       {
         "id": "wf-sample-01-v100",
@@ -25,7 +30,7 @@
     ],
     "quickstart": {
       "runpodTemplateUrl": "https://console.runpod.io/deploy?template=n221r30lq8&ref=f3a44gdl",
-      "installCommandPreview": "comfywizard install --workflow sample --target runpod"
+      "installCommandPreview": "curl -fsSL https://www.comfywizard.tech/api/install/script | bash -s -- --workflow sample --version 1.0.0"
     },
     "dependencies": [
       {

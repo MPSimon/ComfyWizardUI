@@ -1,15 +1,45 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { ExternalLink } from "lucide-react";
 
 import { DependencyCompactTable } from "@/components/shared/dependency-display-options";
 import { SampleWorkflowOnboarding } from "@/components/shared/onboarding/sample-workflow-onboarding";
 import { DependencyTable } from "@/components/shared/dependency-table";
 import { QuickstartPanel } from "@/components/shared/quickstart-panel";
 import { SiteHeader } from "@/components/shared/site-header";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { VariantAShell } from "@/components/variant-a/variant-a-shell";
 import { getWorkflowBySlug } from "@/lib/data/workflows";
+
+function OriginalWorkflowLink({
+  href,
+  label,
+  className = "",
+}: {
+  href: string;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <Button asChild variant="outline" size="sm" className="h-9 gap-2">
+        <a href={href} target="_blank" rel="noreferrer">
+          <Image
+            src="/brands/civitai.png"
+            alt="Civitai logo"
+            width={14}
+            height={14}
+            className="h-3.5 w-3.5 rounded-sm object-contain"
+          />
+          <span>{label}</span>
+          <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      </Button>
+    </div>
+  );
+}
 
 type DetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -25,6 +55,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
   }
 
   const requirements = [...workflow.dependenciesRequired, ...workflow.dependenciesOptional];
+  const originalWorkflow = workflow.workflow.origin;
   const sortedRequirements = [...requirements].sort((a, b) => {
     const sourceRank = (source: string) => {
       if (source === "huggingface") return 0;
@@ -48,9 +79,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 </Badge>
                 {workflow.workflow.isVerified ? <Badge>Verified</Badge> : null}
               </div>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight">
-                {workflow.workflow.title}
-              </h1>
+              <h1 className="mt-3 text-3xl font-semibold tracking-tight">{workflow.workflow.title}</h1>
               <p className="mt-2 text-muted-foreground">{workflow.workflow.description}</p>
               {workflow.workflow.tags.length > 0 ? (
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -128,10 +157,15 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Updated</p>
                 <p className="font-medium">{new Date(workflow.workflow.updatedAt).toLocaleDateString()}</p>
               </div>
-              <div className="rounded-lg border p-3">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Total Requirements</p>
-                <p className="font-medium">{requirements.length}</p>
-              </div>
+              {isSample && originalWorkflow ? (
+                <div className="rounded-lg border p-3">
+                  <OriginalWorkflowLink
+                    href={originalWorkflow.url}
+                    label="Original Civitai workflow"
+                    className="mb-0"
+                  />
+                </div>
+              ) : null}
             </CardContent>
           </Card>
           {workflow.versions.length > 0 ? (

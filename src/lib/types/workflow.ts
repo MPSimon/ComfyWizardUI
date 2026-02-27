@@ -26,6 +26,12 @@ export type WorkflowQuickstart = {
   installCommandPreview: string;
 };
 
+export type WorkflowOrigin = {
+  label: string;
+  url: string;
+  source: "civitai" | "huggingface" | "external";
+};
+
 export type WorkflowListItem = {
   id: string;
   slug: string;
@@ -46,6 +52,7 @@ export type WorkflowDetail = {
   workflow: WorkflowListItem & {
     description: string;
     tags: string[];
+    origin?: WorkflowOrigin;
   };
   versions: WorkflowVersion[];
   dependenciesRequired: DependencyItem[];
@@ -64,6 +71,7 @@ export type WorkflowRecord = {
   isVerified: boolean;
   updatedAt: string;
   tags: string[];
+  origin?: WorkflowOrigin;
   versions: WorkflowVersion[];
   quickstart: WorkflowQuickstart;
   dependencies: DependencyItem[];

@@ -49,6 +49,7 @@ export async function getWorkflowBySlug(slug: string): Promise<WorkflowDetail | 
     ...toListItem(record),
     description: record.description,
     tags: record.tags,
+    origin: record.origin,
   };
 
   const dependenciesRequired = record.dependencies.filter((dependency) => dependency.required);
